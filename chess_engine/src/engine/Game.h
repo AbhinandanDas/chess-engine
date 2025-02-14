@@ -9,12 +9,13 @@ public:
     Game();
     void start();
     void makeMove(const Move& move);
+    bool preMoveValidations(const Move& move);
+    Move stringToMoveConverter(const std::string& move);
     void print(); 
 
 private: 
     Board board;
     Color currentTurn;
-
     bool isInCheck(Color color) const;
     bool isCheckmate(Color color);
     std::pair<int,int> findKing(Color color) const;

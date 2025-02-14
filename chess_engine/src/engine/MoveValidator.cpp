@@ -36,7 +36,6 @@ bool MoveValidator::isValidMove(const Board& board,const Move& move){
     // 6. Check for piece specific movement logic(example for different pieces).
     switch(sourcePiece.getType()) {
         case PieceType::Pawn: 
-            std::cout << "Piece is a pawn." << std::endl;
             return isValidPawnMove(board,move);
         case PieceType::Rook: 
             return isValidRookMove(board,move);
@@ -91,7 +90,7 @@ bool MoveValidator::isValidPawnMove(const Board& board,const Move& move) {
     }
 
     // Check for initial 2 square move. 
-    if((fromY == toY) && (toX == fromX + (2 * direction)) && ((piece.getColor() == Color::White) ? 6 : 1)) {
+    if((fromY == toY) && (toX == fromX + (2 * direction)) && (fromX == ((piece.getColor() == Color::White) ? 6 : 1))) {
         std::cout << "2 step" << std::endl;
         return isPathClear(board,move.fromX,move.fromY,move.toX,move.toY);
     }
@@ -108,10 +107,10 @@ bool MoveValidator::isValidPawnMove(const Board& board,const Move& move) {
 
 bool MoveValidator::isValidRookMove(const Board& board,const Move& move) {
     int dx = move.toX - move.fromX;
-    int dy = move.toY - move.toX;
+    int dy = move.toY - move.fromY;
 
     // Rook can only move in along a file or rank. 
-    if(dx!=0 && dy!=0) {
+    if((dx!=0) && (dy!=0)) {
         return false;
     }
     return isPathClear(board,move.fromX,move.fromY, move.toX,move.toY);

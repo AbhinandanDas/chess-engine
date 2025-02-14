@@ -46,6 +46,7 @@ void Board::initialize() {
 
 void Board::printBoard() const {
     for(int i = 0 ; i < 8 ; ++i) {
+        std::cout << (i + 1) <<"|";
         for(int j = 0; j < 8 ; ++j) {
             Piece piece = squares[i][j];
             if(piece.isEmpty()) {
@@ -72,6 +73,8 @@ void Board::printBoard() const {
         }
         std::cout << std::endl;
     }
+    std::cout << "  - - - - - - - -" << std::endl;
+    std::cout << "  a b c d e f g h" << std::endl;
 }
 
 Piece Board::getPiece(int x,int y) const{
